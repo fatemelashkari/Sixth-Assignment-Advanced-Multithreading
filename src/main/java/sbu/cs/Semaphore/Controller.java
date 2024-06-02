@@ -1,5 +1,7 @@
 package sbu.cs.Semaphore;
 
+import java.util.concurrent.Semaphore;
+
 public class Controller {
 
     /**
@@ -17,7 +19,6 @@ public class Controller {
 
      * Note that every time a thread accesses the resource, you must print its Name and the System Time.
      */
-
     public static void main(String[] args) {
         Operator operator1 = new Operator("operator1");
         Operator operator2 = new Operator("operator2");
