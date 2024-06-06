@@ -24,4 +24,29 @@ public class PiCalculator extends Thread {
     }
     //---------------------------------------------constructor--------------------------------------------------
 
+    //-------------------------------------------calculate method-------------------------------------------------
+    public static String calculate (int floatingPoint, int numThreads) {
+        resetAnswer();
+        int totalTerms = floatingPoint * 10;
+        int range = totalTerms / numThreads;
+        List<Thread> threads = new ArrayList<>();
+        for (int i = 0; i < numThreads; i++) {
+            int start = i * range;
+            PiCalculator piCalculator = new PiCalculator(floatingPoint, start, range);
+            threads.add(piCalculator);
+            piCalculator.start();
+        }
+
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        answer = answer.setScale(floatingPoint, RoundingMode.DOWN);
+        return answer.toString();
+    }
+    //-------------------------------------------calculate method-------------------------------------------------
 }
