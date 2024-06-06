@@ -42,15 +42,18 @@ public class PiCalculator extends Thread {
         }
         updateAnswer(sum);
     }
+    //--------------------------------------------threads' task------------------------------------------------
+
+    //------------------------------------------------update---------------------------------------------------
     private static synchronized void updateAnswer(BigDecimal sum) {
         answer = answer.add(sum);
     }
     public static synchronized void resetAnswer() {
         answer = BigDecimal.ZERO;
     }
-    //--------------------------------------------threads' task---------------------------------------------------
+    //------------------------------------------------update---------------------------------------------------
 
-    //-------------------------------------------calculate method-------------------------------------------------
+    //-------------------------------------------calculate method----------------------------------------------
     public static String calculate (int floatingPoint, int numThreads) {
         resetAnswer();
         int totalTerms = floatingPoint * 10;
@@ -74,6 +77,14 @@ public class PiCalculator extends Thread {
         answer = answer.setScale(floatingPoint, RoundingMode.DOWN);
         return answer.toString();
     }
-    //-------------------------------------------calculate method-------------------------------------------------
+    //-------------------------------------------calculate method----------------------------------------------
+
+    //------------------------------------------to test the program-----------------------------------------------
+    public static void main(String[] args) {
+        int floatingPoint = 100;
+        int numThreads = 8;
+        System.out.println(PiCalculator.calculate (floatingPoint, numThreads));
+    }
+    //------------------------------------------to test the program-----------------------------------------------
 
 }
