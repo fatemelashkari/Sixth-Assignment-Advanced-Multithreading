@@ -13,6 +13,7 @@ public class Operator extends Thread {
     final int permission = 2;
     Semaphore semaphore = new Semaphore(permission); // in this place we inform that two threads can access to the critical section at the same time
     @Override
+
     public void run() {
         for (int i = 0; i < 10; i++)
         {
