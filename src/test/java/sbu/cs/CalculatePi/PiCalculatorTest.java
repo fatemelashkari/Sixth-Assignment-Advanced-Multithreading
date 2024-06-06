@@ -3,36 +3,49 @@ package sbu.cs.CalculatePi;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PiCalculatorTest {
 
-
-
+    private static PiCalculator piCalculator;
     @Test
     void calculateSimple() {
-        PiCalculator piCalculator = new PiCalculator(2);
-        piCalculator.addThread(new PiCalculator(2));
-        piCalculator.addThread(new PiCalculator(2));
-        String pi = piCalculator.calculate();
+        int totalTerms = 2 * 10;
+        int range = totalTerms / 2;
+        for (int i = 0; i < 2; i++) {
+            int start = i * range;
+            piCalculator = new PiCalculator(2, start, range);
+        }
+        String pi = piCalculator.calculate(2 , 2);
         assertEquals(pi, "3.14");
     }
 
     @Test
     void calculateNormal() {
-        PiCalculator piCalculator = new PiCalculator(7);
-        piCalculator.addThread(new PiCalculator(7));
-        piCalculator.addThread(new PiCalculator(7));
-        String pi = piCalculator.calculate();
+        int totalTerms = 7 * 10;
+        int range = totalTerms / 2;
+        List<Thread> threads = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            int start = i * range;
+            piCalculator = new PiCalculator(7, start, range);
+        }
+        String pi = piCalculator.calculate(7 , 2);
         assertEquals(pi, "3.1415926");
     }
 
     @Test
     void calculateHard() {
-        PiCalculator piCalculator = new PiCalculator(100);
-        piCalculator.addThread(new PiCalculator(100));
-        piCalculator.addThread(new PiCalculator(100));
-        String pi = piCalculator.calculate();
+        int totalTerms = 100 * 10;
+        int range = totalTerms / 2;
+        List<Thread> threads = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            int start = i * range;
+            piCalculator = new PiCalculator(100, start, range);
+        }
+        String pi = piCalculator.calculate(100 , 2);
         assertEquals(pi, "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679");
     }
 
@@ -41,11 +54,15 @@ class PiCalculatorTest {
      */
     @Test
     void calculateHard2() {
-        PiCalculator piCalculator = new PiCalculator(1000);
-        piCalculator.addThread(new PiCalculator(1000));
-        piCalculator.addThread(new PiCalculator(1000));
+        int totalTerms = 1000 * 10;
+        int range = totalTerms / 2;
+        List<Thread> threads = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            int start = i * range;
+            piCalculator = new PiCalculator(1000, start, range);
+        }
         String actual = "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657595919530921861173819326117931051185480744623799627495673518857527248912279381830119491298336733624406566430860213949463952247371907021798609437027705392171762931767523846748184676694051320005681271452635608277857713427577896091736371787214684409012249534301465495853710507922796892589235420199561121290219608640344181598136297747713099605187072113499999983729780499510597317328160963185950244594553469083026425223082533446850352619311881710100031378387528865875332083814206171776691473035982534904287554687311595628638823537875937519577818577805321712268066130019278766111959092164201989";
-        String pi = piCalculator.calculate();
+        String pi = piCalculator.calculate(1000 , 2);
         assertEquals(pi, actual);
     }
 }
