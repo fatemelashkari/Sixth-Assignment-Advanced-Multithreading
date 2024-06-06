@@ -24,6 +24,32 @@ public class PiCalculator extends Thread {
     }
     //---------------------------------------------constructor--------------------------------------------------
 
+    //--------------------------------------------threads' task-------------------------------------------------
+    @Override
+    public void run() {
+        MathContext mc = new MathContext(floatingPoint + 10);
+        BigDecimal sum = BigDecimal.ZERO;
+        BigDecimal sixteen = new BigDecimal("16");
+        for (int i = start; i < start + range; i++) {
+            BigDecimal temp = BigDecimal.ONE.divide(sixteen.pow(i), mc)
+                    .multiply(
+                            new BigDecimal("4").divide(new BigDecimal(8 * i + 1), mc)
+                                    .subtract(new BigDecimal("2").divide(new BigDecimal(8 * i + 4), mc))
+                                    .subtract(new BigDecimal("1").divide(new BigDecimal(8 * i + 5), mc))
+                                    .subtract(new BigDecimal("1").divide(new BigDecimal(8 * i + 6), mc))
+                    );
+            sum = sum.add(temp);
+        }
+        updateAnswer(sum);
+    }
+    private static synchronized void updateAnswer(BigDecimal sum) {
+        answer = answer.add(sum);
+    }
+    public static synchronized void resetAnswer() {
+        answer = BigDecimal.ZERO;
+    }
+    //--------------------------------------------threads' task---------------------------------------------------
+
     //-------------------------------------------calculate method-------------------------------------------------
     public static String calculate (int floatingPoint, int numThreads) {
         resetAnswer();
@@ -49,4 +75,5 @@ public class PiCalculator extends Thread {
         return answer.toString();
     }
     //-------------------------------------------calculate method-------------------------------------------------
+
 }
