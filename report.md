@@ -1,0 +1,7 @@
+# Pi Calculation
+### . In this project I used from Big Decimal class and BBP algorithm to calculate Pi number.
+### . I searched a lot to find the best algorithm to calculate Pi number with high precision
+### . The BBP algorithm as follows :
+#### The BBP (Bailey–Borwein–Plouffe) algorithm is a formula that allows for the calculation of the digits of the mathematical constant pi (π) without needing to calculate the digits in order. The algorithm was discovered in 1995 by David H. Bailey, Peter Borwein, and Simon Plouffe.
+![Pi-photo](https://s30.picofile.com/file/8476363042/Pi.png)
+#### In this formula (k) will start from 0 to infinity. As the index (k) increases, the terms in the series become smaller, contributing fewer and fewer digits to the final value of pi, it means that when we are increasing the (k) the result of the sum has high precision and you can continue as you want to have the Pi number with the highest precision. The advantage of the BBP formula is that it allows for the calculation of individual digits of pi without needing to calculate all the preceding digits. This makes it useful for computing the digits of pi in parallel, as different processors can work on different parts of the series simultaneously.
